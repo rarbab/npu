@@ -15,17 +15,7 @@ static int config_show(struct seq_file *seq, void *v)
 	return 0;
 }
 
-static int config_open(struct inode *inode, struct file *file)
-{
-	return single_open(file, config_show, inode->i_private);
-}
-
-static const struct file_operations config_fops = {
-	.open		= config_open,
-	.read		= seq_read,
-	.llseek		= seq_lseek,
-	.release	= single_release,
-};
+DEFINE_SHOW_ATTRIBUTE(config);
 
 static int run_procedure(void *data, u64 pnum)
 {
