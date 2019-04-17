@@ -37,10 +37,6 @@ void npu_dump_config(struct pci_dev *pd, struct seq_file *seq)
 
 #define PROCEDURE_STATUS_REG	0x84
 #define PROCEDURE_CONTROL_REG	0x88
-#define SALT_DL_CMD_REG		0x90
-#define SALT_DL_STAT_REG	0x94
-#define SALT_LINK_INTR_REG	0x98
-
 #define PROCEDURE_COMPLETE	(1 << 30)
 
 u32 npu_run_procedure(struct pci_dev *pd, u32 pnum)
