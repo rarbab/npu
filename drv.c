@@ -60,27 +60,14 @@ int npu_chip_id(struct pci_dev *pd)
 }
 
 #define LINK_NUM		0x8c
-#define LINKS_PER_NPU	4
 
 int npu_chip_link_index(struct pci_dev *pd)
 {
-	struct device_node *phb;
-	u32 npu_index;
 	u8 dev_index;
-	int rc;
-
-	phb = of_get_parent(pd->dev.of_node);
-	if (!phb)
-		return -1;
-
-	rc = of_property_read_u32(phb, "ibm,npu-index", &npu_index);
-	of_node_put(phb);
-	if (rc)
-		return -1;
 
 	pci_read_config_byte(pd, LINK_NUM, &dev_index);
 
-	return npu_index * LINKS_PER_NPU + dev_index;
+	return dev_index;
 }
 
 static struct pci_device_id npu_id_table[] = {
