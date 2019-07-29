@@ -9,6 +9,7 @@
 #include <linux/pci.h>
 #include <linux/debugfs.h>
 #include <linux/delay.h>
+#include <asm/debugfs.h>
 
 struct dentry *npu_debugfs_add(struct pci_dev *pd, struct dentry *parent);
 
@@ -117,7 +118,8 @@ static int __init npu_module_init(void)
 {
 	int rc;
 
-	npu_debugfs_root = debugfs_create_dir(npu_driver.name, NULL);
+	npu_debugfs_root = debugfs_create_dir(npu_driver.name,
+					      powerpc_debugfs_root);
 
 	rc = pci_register_driver(&npu_driver);
 	if (rc)
